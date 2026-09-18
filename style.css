@@ -48,14 +48,23 @@ body{
   z-index:2;
 }
 
+
 .particle{
   position:absolute;
   width:3px;
   height:3px;
   background:var(--gold-light);
   border-radius:50%;
-  opacity:.7;
+  opacity:.35;
+  filter:blur(.3px);
   animation:float linear infinite;
+}
+
+.particle.large{
+  width:7px;
+  height:7px;
+  opacity:.75;
+  filter:blur(1px);
 }
 
 @keyframes float{
