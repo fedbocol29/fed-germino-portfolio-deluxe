@@ -230,7 +230,7 @@ color:#1C1309;
 .parchment{
 background:var(--parchment);
 color:#2C2114;
-padding:100px 8%;
+padding:100px 8% 100px 180px;
 }
 
 .section-title{
