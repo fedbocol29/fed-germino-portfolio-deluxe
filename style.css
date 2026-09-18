@@ -404,3 +404,20 @@ opacity:1;
 transform:none;
 
 }
+
+/* Skills Pills */
+
+.skills{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+margin-top:20px;
+}
+
+.skills span{
+border:1px solid var(--gold);
+padding:10px 18px;
+border-radius:40px;
+background:rgba(201,161,91,.08);
+font-family:"Libre Baskerville",serif;
+}
