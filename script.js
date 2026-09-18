@@ -50,18 +50,29 @@ heroBg.style.transform=
 
 }
 
+// ===============================
+// Cinematic Hero Movement
+// ===============================
+
 const hero=document.querySelector(".hero");
+const heroBg=document.querySelector(".hero-bg");
 
 if(hero){
 
 document.addEventListener("mousemove",e=>{
 
-const x=(e.clientX/window.innerWidth-.5)*8;
-
-const y=(e.clientY/window.innerHeight-.5)*6;
+const x=(e.clientX/window.innerWidth-.5)*10;
+const y=(e.clientY/window.innerHeight-.5)*8;
 
 hero.style.setProperty("--mx",`${x}px`);
 hero.style.setProperty("--my",`${y}px`);
+
+if(heroBg){
+
+heroBg.style.transform=
+`translate(${x/5}px,${y/5}px) scale(1.08)`;
+
+}
 
 });
 
