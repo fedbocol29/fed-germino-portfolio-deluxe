@@ -171,16 +171,28 @@ opacity:.9;
 .hero::after{
 content:"";
 position:absolute;
-right:5%;
+right:4%;
 bottom:0;
-width:34%;
-height:92%;
+width:32%;
+height:90%;
 background:url("assets/marble-statue.jpeg") bottom center/contain no-repeat;
-filter:drop-shadow(0 0 35px rgba(201,161,91,.25));
+filter:drop-shadow(0 0 40px rgba(201,161,91,.45));
 transform:translate(var(--mx,0),var(--my,0));
-transition:transform .15s ease-out;
+transition:transform .18s ease-out;
+animation:statueFloat 7s ease-in-out infinite;
+z-index:2;
+}
+@keyframes statueFloat{
+
+0%,100%{
+transform:translate(var(--mx,0),var(--my,0));
 }
 
+50%{
+transform:translate(var(--mx,0),calc(var(--my,0) - 10px));
+}
+
+}
 .hero-content{
 position:relative;
 z-index:3;
