@@ -364,9 +364,23 @@ transition:.7s;
 @media(max-width:900px){
 
 .sidebar{
-left:20px;
-top:25px;
-transform:none;
+left:12px;
+top:50%;
+transform:translateY(-50%);
+width:90px;
+padding:18px 12px;
+border-radius:18px;
+}
+
+.logo{
+font-size:36px;
+margin-bottom:18px;
+}
+
+.sidebar nav a{
+padding:10px 8px;
+font-size:15px;
+text-align:center;
 }
 
 .hero{
@@ -374,7 +388,7 @@ padding:120px 8%;
 }
 
 .hero-title{
-font-size:54px;
+font-size:52px;
 }
 
 .hero::after{
