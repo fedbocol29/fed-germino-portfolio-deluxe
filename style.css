@@ -189,10 +189,36 @@ max-width:650px;
 
 .hero-title{
 font-family:Cinzel,serif;
-font-size:86px;
+font-size:88px;
 line-height:.9;
+font-weight:700;
+background:linear-gradient(
+120deg,
+#fff6d7 0%,
+#d4a24a 35%,
+#fff8dc 50%,
+#d4a24a 70%,
+#fff6d7 100%);
+background-size:250% auto;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:goldShine 6s linear infinite;
+}
+.hero-title span{
+display:block;
 }
 
+@keyframes goldShine{
+
+0%{
+background-position:-200% center;
+}
+
+100%{
+background-position:200% center;
+}
+
+}
 .hero-title span{
 display:block;
 color:var(--gold);
