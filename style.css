@@ -68,19 +68,32 @@ body{
 
 @keyframes float{
 
-  0%{
-    transform:translateY(110vh) scale(.3);
-    opacity:0;
-  }
+0%{
+transform:
+translateY(110vh)
+translateX(0)
+scale(.3);
+opacity:0;
+}
 
-  20%{
-    opacity:.8;
-  }
+20%{
+opacity:.7;
+}
 
-  100%{
-    transform:translateY(-20vh) scale(1.2);
-    opacity:0;
-  }
+50%{
+transform:
+translateY(50vh)
+translateX(18px)
+scale(1);
+}
+
+100%{
+transform:
+translateY(-20vh)
+translateX(-18px)
+scale(1.25);
+opacity:0;
+}
 
 }
 
