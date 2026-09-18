@@ -14,25 +14,29 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===============================
   // Floating Dust Particles
   // ===============================
-  const particles = document.querySelector(".particles");
+  
+const particles = document.querySelector(".particles");
 
-  if (particles) {
+if (particles) {
 
-    for (let i = 0; i < 45; i++) {
+  for (let i = 0; i < 70; i++) {
 
-      const p = document.createElement("span");
+    const p = document.createElement("span");
 
-      p.className = "particle";
+    p.className = "particle";
 
-      p.style.left = Math.random() * 100 + "%";
-
-      p.style.animationDelay = Math.random() * 12 + "s";
-
-      p.style.animationDuration = (10 + Math.random() * 10) + "s";
-
-      particles.appendChild(p);
+    if (i % 3 === 0) {
+      p.classList.add("large");
     }
+
+    p.style.left = Math.random() * 100 + "%";
+    p.style.animationDelay = Math.random() * 15 + "s";
+    p.style.animationDuration = (12 + Math.random() * 12) + "s";
+
+    particles.appendChild(p);
   }
+
+}
 
   // ===============================
   // Cathedral Parallax
