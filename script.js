@@ -143,3 +143,37 @@ document.addEventListener("mousemove", (e) => {
   });
 
 });
+// ===============================
+// Renaissance Page Turn
+// ===============================
+
+const transition=document.getElementById("page-transition");
+
+document.querySelectorAll("a[href]").forEach(link=>{
+
+const href=link.getAttribute("href");
+
+if(
+href &&
+!href.startsWith("#") &&
+!href.startsWith("mailto:") &&
+!href.startsWith("http")
+){
+
+link.addEventListener("click",(e)=>{
+
+e.preventDefault();
+
+transition.classList.add("active");
+
+setTimeout(()=>{
+
+window.location=href;
+
+},650);
+
+});
+
+}
+
+});
