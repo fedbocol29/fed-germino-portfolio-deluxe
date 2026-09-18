@@ -123,46 +123,42 @@ document.addEventListener("DOMContentLoaded", () => {
     .forEach(el => observer.observe(el));
 
   // ===============================
-  // Museum Scroll Navigation
-  // ===============================
+// Cathedral Camera Navigation
+// ===============================
 
-  const pages = [
-    "index.html",
-    "projects.html",
-    "about.html"
-  ];
+const pages = ["index.html","projects.html","about.html"];
+const current = location.pathname.split("/").pop() || "index.html";
+const index = pages.indexOf(current);
 
-  const current = location.pathname.split("/").pop() || "index.html";
-  const index = pages.indexOf(current);
+let navigating = false;
 
-  let locked = false;
+window.addEventListener("wheel",(e)=>{
 
-  window.addEventListener("wheel", e => {
+  if(navigating) return;
 
-    if (locked) return;
+  const atTop = window.scrollY <= 5;
+  const atBottom =
+    window.innerHeight + window.scrollY >=
+    document.documentElement.scrollHeight - 5;
 
-    if (Math.abs(e.deltaY) < 40) return;
+  let target = null;
 
-    let next = index;
+  if(e.deltaY > 0 && atBottom && index < pages.length-1){
+    target = pages[index+1];
+  }
 
-    if (e.deltaY > 0 && index < pages.length - 1) {
-      next = index + 1;
-    }
+  if(e.deltaY < 0 && atTop && index > 0){
+    target = pages[index-1];
+  }
 
-    if (e.deltaY < 0 && index > 0) {
-      next = index - 1;
-    }
+  if(!target) return;
 
-    if (next === index) return;
+  navigating = true;
 
-    locked = true;
+  document.body.classList.add("page-leaving");
 
-    document.body.classList.add("page-leaving");
+  setTimeout(()=>{
+    window.location.href = target;
+  },650);
 
-    setTimeout(() => {
-      window.location.href = pages[next];
-    }, 500);
-
-  }, { passive: true });
-
-});
+},{passive:true});
