@@ -187,7 +187,7 @@ right:5%;
 bottom:0;
 width:34%;
 height:92%;
-background:url("marble-statue.jpeg") bottom center/contain no-repeat;
+background:url("assets/marble-statue.jpeg") bottom center/contain no-repeat;
 filter:drop-shadow(0 0 35px rgba(201,161,91,.25));
 transform:translate(var(--mx,0),var(--my,0));
 transition:transform .15s ease-out;
