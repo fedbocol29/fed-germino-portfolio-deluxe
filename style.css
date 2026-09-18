@@ -542,3 +542,20 @@ body.page-leaving{
 html{
   scroll-behavior:smooth;
 }
+/* ===============================
+   Cathedral Camera Transition
+=============================== */
+
+body{
+  opacity:1;
+  transition:
+    transform .65s cubic-bezier(.22,.61,.36,1),
+    filter .65s cubic-bezier(.22,.61,.36,1),
+    opacity .65s ease;
+}
+
+body.page-leaving{
+  transform:scale(1.04) translateY(-18px);
+  filter:blur(3px) brightness(.95);
+  opacity:.9;
+}
