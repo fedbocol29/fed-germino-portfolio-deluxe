@@ -1,69 +1,141 @@
-// Cursor Glow
 
-const glow=document.querySelector(".cursor-glow");
+document.addEventListener("DOMContentLoaded", () => {
 
-document.addEventListener("mousemove",e=>{
+  // ===============================
+  // Mouse Gold Glow
+  // ===============================
+  const glow = document.querySelector(".cursor-glow");
 
-glow.style.left=e.clientX+"px";
+  document.addEventListener("mousemove", (e) => {
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+  });
 
-glow.style.top=e.clientY+"px";
+  // ===============================
+  // Floating Dust Particles
+  // ===============================
+  const particles = document.querySelector(".particles");
 
-});
+  if (particles) {
 
-// Floating particles
+    for (let i = 0; i < 45; i++) {
 
-const particles=document.querySelector(".particles");
+      const p = document.createElement("span");
 
-if(particles){
+      p.className = "particle";
 
-for(let i=0;i<40;i++){
+      p.style.left = Math.random() * 100 + "%";
 
-const p=document.createElement("span");
+      p.style.animationDelay = Math.random() * 12 + "s";
 
-p.className="particle";
+      p.style.animationDuration = (10 + Math.random() * 10) + "s";
 
-p.style.left=Math.random()*100+"%";
+      particles.appendChild(p);
+    }
+  }
 
-p.style.animationDelay=Math.random()*10+"s";
+  // ===============================
+  // Cathedral Parallax
+  // ===============================
+  const heroBg = document.querySelector(".hero-bg");
 
-p.style.animationDuration=(10+Math.random()*12)+"s";
+  window.addEventListener("scroll", () => {
 
-particles.appendChild(p);
+    const offset = window.scrollY * 0.12;
 
-}
+    heroBg.style.transform = `translateY(${offset}px) scale(1.06)`;
 
-}
+  });
 
-// Reveal animations
+  // ===============================
+  // Living Statue Effect
+  // ===============================
+  const hero = document.querySelector(".hero");
 
-const observer=new IntersectionObserver(entries=>{
+  document.addEventListener("mousemove", (e) => {
 
-entries.forEach(entry=>{
+    if (!hero) return;
 
-if(entry.isIntersecting){
+    const x = (e.clientX / window.innerWidth - .5) * 10;
 
-entry.target.classList.add("show");
+    const y = (e.clientY / window.innerHeight - .5) * 6;
 
-}
+    hero.style.setProperty("--mx", x + "px");
+    hero.style.setProperty("--my", y + "px");
 
-});
+  });
 
-});
+  // ===============================
+  // Video Preview Hover
+  // ===============================
+  document.querySelectorAll("video").forEach(video => {
 
-document.querySelectorAll(".card,.gallery-card").forEach(el=>observer.observe(el));
+    video.addEventListener("mouseenter", () => {
 
-// Auto-play preview videos
+      video.play();
 
-document.querySelectorAll("video").forEach(video=>{
+    });
 
-video.addEventListener("mouseenter",()=>video.play());
+    video.addEventListener("mouseleave", () => {
 
-video.addEventListener("mouseleave",()=>{
+      video.pause();
 
-video.pause();
+      video.currentTime = 0;
 
-video.currentTime=0;
+    });
 
-});
+  });
+
+  // ===============================
+  // 3D Project Cards
+  // ===============================
+  document.querySelectorAll(".card").forEach(card => {
+
+    card.addEventListener("mousemove", e => {
+
+      const rect = card.getBoundingClientRect();
+
+      const x = (e.clientX - rect.left) / rect.width - .5;
+
+      const y = (e.clientY - rect.top) / rect.height - .5;
+
+      card.style.transform =
+        `perspective(900px)
+         rotateX(${-y * 6}deg)
+         rotateY(${x * 8}deg)
+         translateY(-12px)`;
+
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+      card.style.transform = "";
+
+    });
+
+  });
+
+  // ===============================
+  // Fade-in Sections
+  // ===============================
+  const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+
+        entry.target.classList.add("show");
+
+      }
+
+    });
+
+  }, { threshold: .15 });
+
+  document.querySelectorAll(".card,.section-title").forEach(el => {
+
+    observer.observe(el);
+
+  });
 
 });
