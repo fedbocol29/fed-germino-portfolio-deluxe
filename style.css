@@ -302,15 +302,16 @@ main{
 }
 
 .card:hover{
-
   transform:
-  perspective(900px)
-  rotateX(3deg)
-  rotateY(3deg)
-  translateY(-12px);
+    perspective(1000px)
+    rotateX(5deg)
+    rotateY(5deg)
+    translateY(-14px)
+    scale(1.02);
 
-  box-shadow:0 25px 50px rgba(0,0,0,.22);
-
+  box-shadow:
+    0 35px 70px rgba(0,0,0,.35),
+    0 0 35px rgba(201,161,91,.35);
 }
 
 .card img,
