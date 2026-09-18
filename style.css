@@ -395,4 +395,26 @@ font-size:52px;
 display:none;
 }
 
+/* Prevent content from hiding behind sidebar */
+
+.parchment{
+padding:80px 25px 80px 120px;
+}
+
+.about-content{
+max-width:100%;
+}
+
+.skills{
+justify-content:flex-start;
+}
+
+.contact-links{
+flex-direction:column;
+}
+
+.contact-links a{
+text-align:center;
+}
+
 }
