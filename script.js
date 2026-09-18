@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===============================
-  // Floating Dust Particles
+  // Floating Dust
   // ===============================
   const particles = document.querySelector(".particles");
 
@@ -22,9 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const p = document.createElement("span");
       p.className = "particle";
 
-      if (i % 3 === 0) {
-        p.classList.add("large");
-      }
+      if (i % 3 === 0) p.classList.add("large");
 
       p.style.left = Math.random() * 100 + "%";
       p.style.animationDelay = Math.random() * 15 + "s";
@@ -41,28 +39,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (heroBg) {
     window.addEventListener("scroll", () => {
-      const offset = window.scrollY * 0.12;
-      heroBg.style.transform = `translateY(${offset}px) scale(1.06)`;
+      heroBg.style.transform =
+        `translateY(${window.scrollY * .12}px) scale(1.06)`;
     });
   }
 
   // ===============================
-  // Living Statue Effect
+  // Living Statue
   // ===============================
   const hero = document.querySelector(".hero");
 
   if (hero) {
     document.addEventListener("mousemove", (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 8;
-      const y = (e.clientY / window.innerHeight - 0.5) * 6;
+
+      const x = (e.clientX / window.innerWidth - .5) * 8;
+      const y = (e.clientY / window.innerHeight - .5) * 6;
 
       hero.style.setProperty("--mx", `${x}px`);
       hero.style.setProperty("--my", `${y}px`);
+
     });
   }
 
   // ===============================
-  // Video Preview Hover
+  // Video Preview
   // ===============================
   document.querySelectorAll("video").forEach(video => {
 
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===============================
-  // 3D Project Cards
+  // 3D Cards
   // ===============================
   document.querySelectorAll(".card").forEach(card => {
 
@@ -86,8 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const rect = card.getBoundingClientRect();
 
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      const x = (e.clientX - rect.left) / rect.width - .5;
+      const y = (e.clientY - rect.top) / rect.height - .5;
 
       card.style.transform = `
         perspective(900px)
@@ -117,10 +117,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-  }, { threshold: 0.15 });
+  }, { threshold: .15 });
 
-  document.querySelectorAll(".card, .section-title").forEach(el => {
-    observer.observe(el);
-  });
+  document.querySelectorAll(".card,.section-title")
+    .forEach(el => observer.observe(el));
+
+  // ===============================
+  // Museum Scroll Navigation
+  // ===============================
+
+  const pages = [
+    "index.html",
+    "projects.html",
+    "about.html"
+  ];
+
+  const current = location.pathname.split("/").pop() || "index.html";
+  const index = pages.indexOf(current);
+
+  let locked = false;
+
+  window.addEventListener("wheel", e => {
+
+    if (locked) return;
+
+    if (Math.abs(e.deltaY) < 40) return;
+
+    let next = index;
+
+    if (e.deltaY > 0 && index < pages.length - 1) {
+      next = index + 1;
+    }
+
+    if (e.deltaY < 0 && index > 0) {
+      next = index - 1;
+    }
+
+    if (next === index) return;
+
+    locked = true;
+
+    document.body.classList.add("page-leaving");
+
+    setTimeout(() => {
+      window.location.href = pages[next];
+    }, 500);
+
+  }, { passive: true });
 
 });
