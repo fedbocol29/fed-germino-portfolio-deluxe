@@ -1,141 +1,134 @@
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",()=>{
 
-  // ===============================
-  // Mouse Gold Glow
-  // ===============================
-  const glow = document.querySelector(".cursor-glow");
+const glow=document.querySelector(".cursor-glow");
 
-  document.addEventListener("mousemove", (e) => {
-    glow.style.left = e.clientX + "px";
-    glow.style.top = e.clientY + "px";
-  });
+if(glow){
 
-  // ===============================
-  // Floating Dust Particles
-  // ===============================
-  const particles = document.querySelector(".particles");
+document.addEventListener("mousemove",e=>{
 
-  if (particles) {
+glow.style.left=e.clientX+"px";
+glow.style.top=e.clientY+"px";
 
-    for (let i = 0; i < 45; i++) {
+});
 
-      const p = document.createElement("span");
+}
 
-      p.className = "particle";
+const particles=document.querySelector(".particles");
 
-      p.style.left = Math.random() * 100 + "%";
+if(particles){
 
-      p.style.animationDelay = Math.random() * 12 + "s";
+for(let i=0;i<70;i++){
 
-      p.style.animationDuration = (10 + Math.random() * 10) + "s";
+const p=document.createElement("span");
 
-      particles.appendChild(p);
-    }
-  }
+p.className="particle";
 
-  // ===============================
-  // Cathedral Parallax
-  // ===============================
-  const heroBg = document.querySelector(".hero-bg");
+if(i%3===0)p.classList.add("large");
 
-  window.addEventListener("scroll", () => {
+p.style.left=Math.random()*100+"%";
 
-    const offset = window.scrollY * 0.12;
+p.style.animationDelay=Math.random()*15+"s";
 
-    heroBg.style.transform = `translateY(${offset}px) scale(1.06)`;
+p.style.animationDuration=(12+Math.random()*12)+"s";
 
-  });
+particles.appendChild(p);
 
-  // ===============================
-  // Living Statue Effect
-  // ===============================
-  const hero = document.querySelector(".hero");
+}
 
-  document.addEventListener("mousemove", (e) => {
+}
 
-    if (!hero) return;
+const heroBg=document.querySelector(".hero-bg");
 
-    const x = (e.clientX / window.innerWidth - .5) * 10;
+if(heroBg){
 
-    const y = (e.clientY / window.innerHeight - .5) * 6;
+window.addEventListener("scroll",()=>{
 
-    hero.style.setProperty("--mx", x + "px");
-    hero.style.setProperty("--my", y + "px");
+heroBg.style.transform=
+`translateY(${window.scrollY*.12}px) scale(1.06)`;
 
-  });
+});
 
-  // ===============================
-  // Video Preview Hover
-  // ===============================
-  document.querySelectorAll("video").forEach(video => {
+}
 
-    video.addEventListener("mouseenter", () => {
+const hero=document.querySelector(".hero");
 
-      video.play();
+if(hero){
 
-    });
+document.addEventListener("mousemove",e=>{
 
-    video.addEventListener("mouseleave", () => {
+const x=(e.clientX/window.innerWidth-.5)*8;
 
-      video.pause();
+const y=(e.clientY/window.innerHeight-.5)*6;
 
-      video.currentTime = 0;
+hero.style.setProperty("--mx",`${x}px`);
 
-    });
+hero.style.setProperty("--my",`${y}px`);
 
-  });
+});
 
-  // ===============================
-  // 3D Project Cards
-  // ===============================
-  document.querySelectorAll(".card").forEach(card => {
+}
 
-    card.addEventListener("mousemove", e => {
+document.querySelectorAll("video").forEach(video=>{
 
-      const rect = card.getBoundingClientRect();
+video.addEventListener("mouseenter",()=>{
 
-      const x = (e.clientX - rect.left) / rect.width - .5;
+video.play().catch(()=>{});
 
-      const y = (e.clientY - rect.top) / rect.height - .5;
+});
 
-      card.style.transform =
-        `perspective(900px)
-         rotateX(${-y * 6}deg)
-         rotateY(${x * 8}deg)
-         translateY(-12px)`;
+video.addEventListener("mouseleave",()=>{
 
-    });
+video.pause();
 
-    card.addEventListener("mouseleave", () => {
+video.currentTime=0;
 
-      card.style.transform = "";
+});
 
-    });
+});
 
-  });
+document.querySelectorAll(".card").forEach(card=>{
 
-  // ===============================
-  // Fade-in Sections
-  // ===============================
-  const observer = new IntersectionObserver(entries => {
+card.addEventListener("mousemove",e=>{
 
-    entries.forEach(entry => {
+const rect=card.getBoundingClientRect();
 
-      if (entry.isIntersecting) {
+const x=(e.clientX-rect.left)/rect.width-.5;
 
-        entry.target.classList.add("show");
+const y=(e.clientY-rect.top)/rect.height-.5;
 
-      }
+card.style.transform=`
+perspective(900px)
+rotateX(${-y*6}deg)
+rotateY(${x*8}deg)
+translateY(-12px)
+`;
 
-    });
+});
 
-  }, { threshold: .15 });
+card.addEventListener("mouseleave",()=>{
 
-  document.querySelectorAll(".card,.section-title").forEach(el => {
+card.style.transform="";
 
-    observer.observe(el);
+});
 
-  });
+});
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},{threshold:.15});
+
+document.querySelectorAll(".card,.section-title")
+.forEach(el=>observer.observe(el));
 
 });
