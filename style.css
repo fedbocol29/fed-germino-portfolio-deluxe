@@ -490,3 +490,39 @@ border-radius:40px;
 background:rgba(201,161,91,.08);
 font-family:"Libre Baskerville",serif;
 }
+/* ==================================
+   Renaissance Page Turn Transition
+================================== */
+
+#page-transition{
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:9999;
+overflow:hidden;
+}
+
+.page-sheet{
+position:absolute;
+top:0;
+right:-120%;
+width:120%;
+height:100%;
+background:
+linear-gradient(135deg,
+#f4ead3,
+#e3d1ab 40%,
+#d4b77a 70%,
+#b88934);
+box-shadow:
+-25px 0 60px rgba(0,0,0,.45);
+transform-origin:right center;
+transition:
+transform .9s cubic-bezier(.22,.61,.36,1),
+right .9s cubic-bezier(.22,.61,.36,1);
+}
+
+#page-transition.active .page-sheet{
+right:0;
+transform:rotateY(-8deg);
+}
