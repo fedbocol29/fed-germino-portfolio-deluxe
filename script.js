@@ -50,21 +50,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===============================
   // Living Statue Effect
   // ===============================
-  const hero = document.querySelector(".hero");
+  
+const hero = document.querySelector(".hero");
+const statue = document.querySelector(".hero");
 
-  document.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove", (e) => {
 
-    if (!hero) return;
+  if (!statue) return;
 
-    const x = (e.clientX / window.innerWidth - .5) * 10;
+  const x = (e.clientX / window.innerWidth - 0.5) * 8;
+  const y = (e.clientY / window.innerHeight - 0.5) * 6;
 
-    const y = (e.clientY / window.innerHeight - .5) * 6;
+  statue.style.setProperty("--mx", `${x}px`);
+  statue.style.setProperty("--my", `${y}px`);
 
-    hero.style.setProperty("--mx", x + "px");
-    hero.style.setProperty("--my", y + "px");
-
-  });
-
+});
   // ===============================
   // Video Preview Hover
   // ===============================
