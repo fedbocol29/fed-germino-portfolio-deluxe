@@ -181,7 +181,30 @@ main{
   animation:statueFloat 8s ease-in-out infinite;
 
 }
+/* Cathedral Light Rays */
 
+.hero::before{
+  content:"";
+  position:absolute;
+  top:-10%;
+  left:50%;
+  transform:translateX(-50%);
+  width:85%;
+  height:120%;
+  background:radial-gradient(circle, rgba(255,220,150,.18), transparent 65%);
+  filter:blur(40px);
+  animation:lightPulse 6s ease-in-out infinite;
+  z-index:1;
+}
+
+@keyframes lightPulse{
+  0%,100%{
+    opacity:.45;
+  }
+  50%{
+    opacity:.95;
+  }
+}
 @keyframes statueFloat{
 
   0%,100%{
