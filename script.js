@@ -1,164 +1,69 @@
-document.addEventListener("DOMContentLoaded", () => {
+// Cursor Glow
 
-  // ===============================
-  // Mouse Gold Glow
-  // ===============================
-  const glow = document.querySelector(".cursor-glow");
+const glow=document.querySelector(".cursor-glow");
 
-  if (glow) {
-    document.addEventListener("mousemove", (e) => {
-      glow.style.left = e.clientX + "px";
-      glow.style.top = e.clientY + "px";
-    });
-  }
+document.addEventListener("mousemove",e=>{
 
-  // ===============================
-  // Floating Dust
-  // ===============================
-  const particles = document.querySelector(".particles");
+glow.style.left=e.clientX+"px";
 
-  if (particles) {
-    for (let i = 0; i < 70; i++) {
-      const p = document.createElement("span");
-      p.className = "particle";
+glow.style.top=e.clientY+"px";
 
-      if (i % 3 === 0) p.classList.add("large");
+});
 
-      p.style.left = Math.random() * 100 + "%";
-      p.style.animationDelay = Math.random() * 15 + "s";
-      p.style.animationDuration = (12 + Math.random() * 12) + "s";
+// Floating particles
 
-      particles.appendChild(p);
-    }
-  }
+const particles=document.querySelector(".particles");
 
-  // ===============================
-  // Cathedral Parallax
-  // ===============================
-  const heroBg = document.querySelector(".hero-bg");
+if(particles){
 
-  if (heroBg) {
-    window.addEventListener("scroll", () => {
-      heroBg.style.transform =
-        `translateY(${window.scrollY * .12}px) scale(1.06)`;
-    });
-  }
+for(let i=0;i<40;i++){
 
-  // ===============================
-  // Living Statue
-  // ===============================
-  const hero = document.querySelector(".hero");
+const p=document.createElement("span");
 
-  if (hero) {
-    document.addEventListener("mousemove", (e) => {
+p.className="particle";
 
-      const x = (e.clientX / window.innerWidth - .5) * 8;
-      const y = (e.clientY / window.innerHeight - .5) * 6;
+p.style.left=Math.random()*100+"%";
 
-      hero.style.setProperty("--mx", `${x}px`);
-      hero.style.setProperty("--my", `${y}px`);
+p.style.animationDelay=Math.random()*10+"s";
 
-    });
-  }
+p.style.animationDuration=(10+Math.random()*12)+"s";
 
-  // ===============================
-  // Video Preview
-  // ===============================
-  document.querySelectorAll("video").forEach(video => {
+particles.appendChild(p);
 
-    video.addEventListener("mouseenter", () => {
-      video.play().catch(() => {});
-    });
+}
 
-    video.addEventListener("mouseleave", () => {
-      video.pause();
-      video.currentTime = 0;
-    });
+}
 
-  });
+// Reveal animations
 
-  // ===============================
-  // 3D Cards
-  // ===============================
-  document.querySelectorAll(".card").forEach(card => {
+const observer=new IntersectionObserver(entries=>{
 
-    card.addEventListener("mousemove", e => {
+entries.forEach(entry=>{
 
-      const rect = card.getBoundingClientRect();
+if(entry.isIntersecting){
 
-      const x = (e.clientX - rect.left) / rect.width - .5;
-      const y = (e.clientY - rect.top) / rect.height - .5;
+entry.target.classList.add("show");
 
-      card.style.transform = `
-        perspective(900px)
-        rotateX(${-y * 6}deg)
-        rotateY(${x * 8}deg)
-        translateY(-12px)
-      `;
+}
 
-    });
+});
 
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "";
-    });
+});
 
-  });
+document.querySelectorAll(".card,.gallery-card").forEach(el=>observer.observe(el));
 
-  // ===============================
-  // Fade-in Sections
-  // ===============================
-  const observer = new IntersectionObserver(entries => {
+// Auto-play preview videos
 
-    entries.forEach(entry => {
+document.querySelectorAll("video").forEach(video=>{
 
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      }
+video.addEventListener("mouseenter",()=>video.play());
 
-    });
+video.addEventListener("mouseleave",()=>{
 
-  }, { threshold: .15 });
+video.pause();
 
-  document.querySelectorAll(".card,.section-title")
-    .forEach(el => observer.observe(el));
+video.currentTime=0;
 
-  // ===============================
-// Cathedral Camera Navigation
-// ===============================
+});
 
-const pages = ["index.html","projects.html","about.html"];
-const current = location.pathname.split("/").pop() || "index.html";
-const index = pages.indexOf(current);
-
-let navigating = false;
-
-window.addEventListener("wheel",(e)=>{
-
-  if(navigating) return;
-
-  const atTop = window.scrollY <= 5;
-  const atBottom =
-    window.innerHeight + window.scrollY >=
-    document.documentElement.scrollHeight - 5;
-
-  let target = null;
-
-  if(e.deltaY > 0 && atBottom && index < pages.length-1){
-    target = pages[index+1];
-  }
-
-  if(e.deltaY < 0 && atTop && index > 0){
-    target = pages[index-1];
-  }
-
-  if(!target) return;
-
-  navigating = true;
-
-  document.body.classList.add("page-leaving");
-
-  setTimeout(()=>{
-    window.location.href = target;
-  },650);
-
-},{passive:true});
+});
