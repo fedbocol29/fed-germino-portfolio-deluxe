@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded",()=>{
 
 const glow=document.querySelector(".cursor-glow");
@@ -62,57 +61,44 @@ const x=(e.clientX/window.innerWidth-.5)*8;
 const y=(e.clientY/window.innerHeight-.5)*6;
 
 hero.style.setProperty("--mx",`${x}px`);
-
 hero.style.setProperty("--my",`${y}px`);
 
 });
 
 }
 
-document.querySelectorAll("video").forEach(video=>{
+/* Auto Play Videos */
 
-video.addEventListener("mouseenter",()=>{
+const videoObserver=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+const video=entry.target.querySelector("video");
+
+if(!video)return;
+
+if(entry.isIntersecting){
 
 video.play().catch(()=>{});
 
-});
-
-video.addEventListener("mouseleave",()=>{
+}else{
 
 video.pause();
-
 video.currentTime=0;
 
-});
+}
 
 });
+
+},{threshold:.45});
 
 document.querySelectorAll(".card").forEach(card=>{
 
-card.addEventListener("mousemove",e=>{
-
-const rect=card.getBoundingClientRect();
-
-const x=(e.clientX-rect.left)/rect.width-.5;
-
-const y=(e.clientY-rect.top)/rect.height-.5;
-
-card.style.transform=`
-perspective(900px)
-rotateX(${-y*6}deg)
-rotateY(${x*8}deg)
-translateY(-12px)
-`;
+videoObserver.observe(card);
 
 });
 
-card.addEventListener("mouseleave",()=>{
-
-card.style.transform="";
-
-});
-
-});
+/* Fade In */
 
 const observer=new IntersectionObserver(entries=>{
 
