@@ -1,423 +1,470 @@
 
 :root{
-  --gold:#C9A15B;
-  --gold-light:#E7C780;
-  --paper:#E8DCC5;
-  --black:#0D0C0A;
-  --dark:#17120D;
-  --text:#F7F1E5;
+
+--gold:#C9A15B;
+--gold-light:#E9C98A;
+--dark:#15120E;
+--parchment:#F7F1E5;
+
 }
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
 }
 
 html{
-  scroll-behavior:smooth;
+
+scroll-behavior:smooth;
+
 }
 
 body{
-  background:var(--black);
-  color:var(--text);
-  font-family:Montserrat,sans-serif;
-  overflow-x:hidden;
+
+background:#0F0C09;
+color:white;
+font-family:Montserrat,sans-serif;
+overflow-x:hidden;
+
 }
 
-/* CURSOR GLOW */
+/* Cursor Glow */
 
 .cursor-glow{
-  position:fixed;
-  width:180px;
-  height:180px;
-  background:radial-gradient(circle, rgba(201,161,91,.18), transparent 70%);
-  pointer-events:none;
-  z-index:999;
-  transform:translate(-50%,-50%);
-  transition:opacity .25s;
+
+position:fixed;
+width:220px;
+height:220px;
+background:radial-gradient(circle,rgba(201,161,91,.18),transparent 70%);
+border-radius:50%;
+pointer-events:none;
+transform:translate(-50%,-50%);
+z-index:999;
+
 }
 
-/* PARTICLE CONTAINER */
+/* Floating Dust */
 
 .particles{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-  z-index:2;
+
+position:fixed;
+inset:0;
+overflow:hidden;
+pointer-events:none;
+
 }
 
 .particle{
-  position:absolute;
-  width:3px;
-  height:3px;
-  background:var(--gold-light);
-  border-radius:50%;
-  opacity:.7;
-  animation:float linear infinite;
+
+position:absolute;
+width:3px;
+height:3px;
+background:var(--gold-light);
+border-radius:50%;
+opacity:.35;
+animation:float linear infinite;
+
+}
+
+.particle.large{
+
+width:7px;
+height:7px;
+opacity:.7;
+
 }
 
 @keyframes float{
 
-  0%{
-    transform:translateY(110vh) scale(.3);
-    opacity:0;
-  }
+0%{
+transform:translateY(110vh);
+opacity:0;
+}
 
-  20%{
-    opacity:.8;
-  }
+20%{
+opacity:.7;
+}
 
-  100%{
-    transform:translateY(-20vh) scale(1.2);
-    opacity:0;
-  }
+100%{
+transform:translateY(-20vh) translateX(25px);
+opacity:0;
+}
 
 }
 
-/* SIDEBAR */
+/* Sidebar */
 
 .sidebar{
-  position:fixed;
-  left:0;
-  top:0;
-  width:185px;
-  height:100vh;
-  background:linear-gradient(180deg,#090806,#15110D);
-  border-right:1px solid rgba(201,161,91,.22);
-  padding:30px 22px;
-  z-index:50;
+
+position:fixed;
+left:35px;
+top:50%;
+transform:translateY(-50%);
+z-index:10;
+
 }
 
 .logo{
-  font-family:Cinzel,serif;
-  font-size:38px;
-  color:var(--gold);
-  text-align:center;
-  margin-bottom:50px;
+
+font-family:Cinzel,serif;
+font-size:34px;
+color:var(--gold);
+margin-bottom:35px;
+
 }
 
 .sidebar nav{
-  display:flex;
-  flex-direction:column;
-  gap:18px;
+
+display:flex;
+flex-direction:column;
+gap:18px;
+
 }
 
 .sidebar nav a{
-  text-decoration:none;
-  color:#D7C19C;
-  font-family:"Libre Baskerville",serif;
-  padding:10px;
-  border-left:3px solid transparent;
-  transition:.3s;
+
+color:white;
+text-decoration:none;
+transition:.3s;
+
 }
 
 .sidebar nav a:hover,
 .sidebar nav a.active{
 
-  border-left-color:var(--gold);
-
-  background:rgba(201,161,91,.08);
-
-  transform:translateX(6px);
+color:var(--gold);
 
 }
 
-/* MAIN */
-
-main{
-  margin-left:185px;
-}
-
-/* HERO */
+/* Hero */
 
 .hero{
-  position:relative;
-  height:100vh;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
-  padding:0 8%;
+
+position:relative;
+min-height:100vh;
+display:flex;
+align-items:center;
+padding:0 8%;
+overflow:hidden;
+
 }
 
 .hero-bg{
-  position:absolute;
-  inset:0;
 
-  background:
-  linear-gradient(rgba(6,5,4,.75),rgba(6,5,4,.58)),
-  url("assets/hero-cathedral.jpeg");
+position:absolute;
+inset:0;
+background:url("hero-cathedral.jpeg") center/cover;
+filter:brightness(.35);
+transform:scale(1.06);
 
-  background-size:cover;
-  background-position:center;
-  transform:scale(1.06);
+}
+
+.hero::before{
+
+content:"";
+position:absolute;
+inset:0;
+background:radial-gradient(circle,rgba(255,220,150,.18),transparent 70%);
+filter:blur(35px);
+animation:lightPulse 6s ease-in-out infinite;
+
+}
+
+@keyframes lightPulse{
+
+50%{opacity:.9;}
+
 }
 
 .hero::after{
 
-  content:"";
-
-  position:absolute;
-
-  right:5%;
-
-  bottom:0;
-
-  width:35%;
-
-  height:92%;
-
-  background:url("assets/marble-statue.jpeg");
-
-  background-size:contain;
-
-  background-repeat:no-repeat;
-
-  background-position:bottom center;
-
-  filter:drop-shadow(0 0 45px rgba(201,161,91,.22));
-
-  animation:statueFloat 8s ease-in-out infinite;
+content:"";
+position:absolute;
+right:5%;
+bottom:0;
+width:34%;
+height:92%;
+background:url("marble-statue.jpeg") bottom center/contain no-repeat;
+filter:drop-shadow(0 0 35px rgba(201,161,91,.25));
+transform:translate(var(--mx,0),var(--my,0));
+transition:transform .15s ease-out;
+animation:statueFloat 8s ease-in-out infinite;
 
 }
 
 @keyframes statueFloat{
 
-  0%,100%{
-    transform:translateY(0);
-  }
-
-  50%{
-    transform:translateY(-18px);
-  }
+50%{
+transform:translate(var(--mx,0),calc(var(--my,0) - 10px));
+}
 
 }
 
 .hero-content{
-  position:relative;
-  z-index:3;
-  max-width:620px;
+
+position:relative;
+z-index:3;
+max-width:650px;
+
 }
 
-.eyebrow{
-  letter-spacing:5px;
-  font-size:13px;
-  color:var(--gold-light);
-  margin-bottom:18px;
-  font-family:Cinzel,serif;
+.hero-title{
+
+font-family:Cinzel,serif;
+font-size:86px;
+line-height:.9;
+
 }
 
-.hero h1{
-  font-family:Cinzel,serif;
-  font-size:92px;
-  line-height:.92;
-  margin-bottom:18px;
-  text-shadow:0 5px 30px black;
+.hero-title span{
+
+display:block;
+color:var(--gold);
+
 }
 
-.hero h2{
-  font-family:"Libre Baskerville",serif;
-  font-style:italic;
-  font-weight:400;
-  margin-bottom:22px;
+.hero-subtitle{
+
+margin-top:20px;
+font-family:"Libre Baskerville",serif;
+font-style:italic;
+color:#D7C19D;
+
 }
 
-.hero p{
-  line-height:1.8;
-}
+.hero-description{
 
-/* BUTTON */
+margin-top:24px;
+line-height:1.8;
+color:#E8E0D0;
+
+}
 
 .gold-btn{
-  display:inline-block;
-  margin-top:35px;
-  padding:16px 30px;
-  border:1px solid var(--gold);
-  color:var(--gold);
-  text-decoration:none;
-  font-family:Cinzel,serif;
-  letter-spacing:2px;
-  transition:.35s;
+
+display:inline-block;
+margin-top:35px;
+padding:15px 28px;
+border:1px solid var(--gold);
+color:var(--gold);
+text-decoration:none;
+transition:.35s;
+
 }
 
 .gold-btn:hover{
-  background:var(--gold);
-  color:black;
-  box-shadow:0 0 35px rgba(201,161,91,.35);
+
+background:var(--gold);
+color:#1C1309;
+
 }
 
-/* PARCHMENT SECTION */
+/* Sections */
 
 .parchment{
 
-  background:
-  linear-gradient(rgba(232,220,197,.92),rgba(232,220,197,.95)),
-  url("assets/parchment-texture.jpeg");
-
-  background-size:cover;
-
-  color:#1B140E;
-
-  padding:90px 70px;
+background:var(--parchment);
+color:#2C2114;
+padding:100px 8%;
 
 }
 
 .section-title{
-  margin-bottom:45px;
+
+margin-bottom:45px;
+
 }
 
 .section-title p{
-  font-family:Cinzel,serif;
-  letter-spacing:4px;
-  color:#8B6833;
-  margin-bottom:12px;
+
+letter-spacing:3px;
+color:#A37A36;
+
 }
 
 .section-title h2{
-  font-family:"Libre Baskerville",serif;
-  font-size:48px;
+
+font-family:Cinzel,serif;
+font-size:42px;
+
 }
 
-/* PROJECT CARDS */
+/* Cards */
 
 .cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:24px;
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:35px;
+
 }
 
 .card{
-  background:#F8F2E6;
-  border:1px solid rgba(0,0,0,.08);
-  padding:15px;
-  transition:.45s;
-  transform-style:preserve-3d;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+position:relative;
+background:#F7F1E5;
+padding:18px;
+border:6px solid #A97A2B;
+outline:2px solid #D9B66A;
+box-shadow:0 15px 35px rgba(0,0,0,.25);
+transition:.45s;
+overflow:hidden;
+transform-style:preserve-3d;
+
 }
 
 .card:hover{
 
-  transform:
-  perspective(900px)
-  rotateX(3deg)
-  rotateY(3deg)
-  translateY(-12px);
+transform:perspective(900px) rotateX(5deg) rotateY(5deg) translateY(-12px);
 
-  box-shadow:0 25px 50px rgba(0,0,0,.22);
+}
+
+.card::before{
+
+content:"";
+position:absolute;
+top:-40%;
+left:-25%;
+width:150%;
+height:80%;
+background:linear-gradient(120deg,transparent,rgba(255,230,170,.25),transparent);
+transform:rotate(-12deg);
+transition:.7s;
+
+}
+
+.card:hover::before{
+
+transform:translateX(120%) rotate(-12deg);
 
 }
 
 .card img,
 .card video{
-  width:100%;
-  display:block;
+
+width:100%;
+display:block;
+border:4px solid #4A3820;
+
 }
 
 .card h3{
-  margin:18px 0 10px;
-  font-family:"Libre Baskerville",serif;
+
+margin-top:18px;
+font-family:Cinzel,serif;
+
 }
 
 .card p{
-  line-height:1.7;
+
+margin-top:10px;
+line-height:1.7;
+
 }
 
-/* FOOTER */
+/* About */
 
-footer{
-  margin-left:185px;
-  padding:30px;
-  text-align:center;
-  background:#0B0907;
-  color:#BCA57B;
-  font-family:Cinzel,serif;
-  letter-spacing:2px;
+.about-content{
+
+max-width:720px;
+line-height:1.9;
+
 }
 
-/* MOBILE */
-
-@media(max-width:900px){
-
-.sidebar{
-
-width:100%;
-height:auto;
+.skills{
 
 display:flex;
-justify-content:space-between;
-align-items:center;
-
-padding:18px;
-
-}
-
-.sidebar nav{
-flex-direction:row;
-}
-
-main,
-footer{
-margin-left:0;
-margin-top:82px;
-}
-
-.hero{
-padding:35px;
-}
-
-.hero::after{
-display:none;
-}
-
-.hero h1{
-font-size:54px;
-}
-
-.parchment{
-padding:60px 24px;
-}
-
-.section-title h2{
-font-size:36px;
-}
+flex-wrap:wrap;
+gap:12px;
+margin-top:28px;
 
 }
 
-/* Fade-in Animation */
+.skills span{
+
+padding:10px 18px;
+border:1px solid var(--gold);
+border-radius:40px;
+
+}
+
+.contact-links{
+
+display:flex;
+gap:18px;
+margin-top:35px;
+flex-wrap:wrap;
+
+}
+
+.contact-links a{
+
+padding:14px 24px;
+border:1px solid var(--gold);
+text-decoration:none;
+color:var(--gold);
+transition:.3s;
+
+}
+
+.contact-links a:hover{
+
+background:var(--gold);
+color:#1C1309;
+
+}
+
+/* Fade-in */
 
 .card,
 .section-title{
 
 opacity:0;
-
-transform:translateY(35px);
-
-transition:1s ease;
+transform:translateY(30px);
 
 }
 
-.show{
+.card.show,
+.section-title.show{
 
 opacity:1;
+transform:translateY(0);
+transition:.7s;
 
+}
+
+/* Mobile */
+
+@media(max-width:900px){
+
+.sidebar{
+
+position:fixed;
+left:20px;
+top:25px;
 transform:none;
 
 }
 
-/* Skills Pills */
+.hero{
 
-.skills{
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-margin-top:20px;
+padding:120px 8%;
+
 }
 
-.skills span{
-border:1px solid var(--gold);
-padding:10px 18px;
-border-radius:40px;
-background:rgba(201,161,91,.08);
-font-family:"Libre Baskerville",serif;
+.hero-title{
+
+font-size:54px;
+
+}
+
+.hero::after{
+
+display:none;
+
+}
+
 }
