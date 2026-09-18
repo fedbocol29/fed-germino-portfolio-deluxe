@@ -383,3 +383,24 @@ font-size:36px;
 }
 
 }
+
+/* Fade-in Animation */
+
+.card,
+.section-title{
+
+opacity:0;
+
+transform:translateY(35px);
+
+transition:1s ease;
+
+}
+
+.show{
+
+opacity:1;
+
+transform:none;
+
+}
