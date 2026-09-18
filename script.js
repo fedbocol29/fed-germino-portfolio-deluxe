@@ -166,3 +166,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { passive: true });
 
 });
+body{
+  opacity:1;
+  transition:opacity .55s ease;
+}
+
+body.page-leaving{
+  opacity:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
