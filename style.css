@@ -526,3 +526,19 @@ right .9s cubic-bezier(.22,.61,.36,1);
 right:0;
 transform:rotateY(-8deg);
 }
+/* ===============================
+   Museum Scroll Transition
+=============================== */
+
+body{
+  opacity:1;
+  transition:opacity .55s ease;
+}
+
+body.page-leaving{
+  opacity:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
