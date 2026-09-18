@@ -313,7 +313,26 @@ main{
     0 35px 70px rgba(0,0,0,.35),
     0 0 35px rgba(201,161,91,.35);
 }
+.card::before{
+  content:"";
+  position:absolute;
+  top:-40%;
+  left:-25%;
+  width:150%;
+  height:80%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,230,170,.28),
+    transparent
+  );
+  transform:rotate(-12deg);
+  transition:.7s;
+}
 
+.card:hover::before{
+  transform:translateX(120%) rotate(-12deg);
+}
 .card img,
 .card video{
   width:100%;
