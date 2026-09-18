@@ -147,9 +147,10 @@ overflow:hidden;
 .hero-bg{
 position:absolute;
 inset:0;
-background:url("assets/hero-cathedral.jpeg") center/cover no-repeat;
-filter:brightness(.35);
-transform:scale(1.06);
+background:url("assets/hero-cathedral.jpeg") center center/cover no-repeat;
+filter:brightness(.45);
+transform:scale(1.08);
+transition:transform .25s ease-out;
 }
 
 .hero::before{
