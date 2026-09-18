@@ -82,36 +82,55 @@ opacity:0;
 
 /* Sidebar */
 
+/* ===============================
+   Renaissance Sidebar
+=============================== */
+
 .sidebar{
 position:fixed;
-left:35px;
+left:20px;
 top:50%;
 transform:translateY(-50%);
-z-index:10;
+width:120px;
+padding:24px 18px;
+background:rgba(15,12,9,.82);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+border:1px solid rgba(201,161,91,.35);
+border-radius:24px;
+box-shadow:0 10px 35px rgba(0,0,0,.45);
+z-index:1000;
 }
 
 .logo{
 font-family:Cinzel,serif;
-font-size:34px;
+font-size:52px;
 color:var(--gold);
-margin-bottom:35px;
+text-align:center;
+margin-bottom:28px;
 }
 
 .sidebar nav{
 display:flex;
 flex-direction:column;
-gap:18px;
+gap:12px;
 }
 
 .sidebar nav a{
-color:white;
+display:block;
+padding:12px 14px;
+border-radius:12px;
+color:#E9E0D0;
 text-decoration:none;
+font-weight:500;
 transition:.3s;
 }
 
 .sidebar nav a:hover,
 .sidebar nav a.active{
-color:var(--gold);
+background:linear-gradient(135deg,#C9A15B,#A67C2D);
+color:#1A1208;
+transform:translateX(4px);
 }
 
 /* Hero */
