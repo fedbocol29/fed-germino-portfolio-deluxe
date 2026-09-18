@@ -179,7 +179,8 @@ main{
   filter:drop-shadow(0 0 45px rgba(201,161,91,.22));
 
   animation:statueFloat 8s ease-in-out infinite;
-
+transform:translate(var(--mx,0), var(--my,0));
+transition:transform .15s ease-out;
 }
 /* Cathedral Light Rays */
 
