@@ -1,459 +1,129 @@
 :root{
-
---gold:#C9A15B;
---gold-light:#E9C98A;
---dark:#0F0C09;
---parchment:#F7F1E5;
-
+  --gold:#C9A15B;
+  --gold-light:#E9C98A;
+  --gold-dark:#8A6425;
+  --dark:#0F0C09;
+  --parchment:#F7F1E5;
+  --text:#E9E0D0;
 }
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 html{
-scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-background:var(--dark);
-color:white;
-font-family:Montserrat,sans-serif;
-overflow-x:hidden;
+  background:var(--dark);
+  color:white;
+  font-family:Montserrat,sans-serif;
+  overflow-x:hidden;
 }
 
-/* Cursor Glow */
+/* ===================================
+   Cursor Glow
+=================================== */
 
 .cursor-glow{
-position:fixed;
-width:220px;
-height:220px;
-background:radial-gradient(circle,rgba(201,161,91,.18),transparent 70%);
-border-radius:50%;
-pointer-events:none;
-transform:translate(-50%,-50%);
-z-index:999;
+  position:fixed;
+  width:220px;
+  height:220px;
+  background:radial-gradient(circle,rgba(201,161,91,.18),transparent 70%);
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:999;
 }
 
-/* Floating Dust */
+/* ===================================
+   Floating Dust
+=================================== */
 
 .particles{
-position:fixed;
-inset:0;
-overflow:hidden;
-pointer-events:none;
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:5;
 }
 
 .particle{
-position:absolute;
-width:3px;
-height:3px;
-background:var(--gold-light);
-border-radius:50%;
-opacity:.35;
-animation:float linear infinite;
+  position:absolute;
+  width:3px;
+  height:3px;
+  background:var(--gold-light);
+  border-radius:50%;
+  opacity:.35;
+  animation:float linear infinite;
 }
 
 .particle.large{
-width:7px;
-height:7px;
-opacity:.7;
+  width:7px;
+  height:7px;
+  opacity:.7;
 }
 
 @keyframes float{
 
-0%{
-transform:translateY(110vh);
-opacity:0;
+  0%{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+
+  20%{
+    opacity:.7;
+  }
+
+  100%{
+    transform:translateY(-20vh) translateX(20px);
+    opacity:0;
+  }
+
 }
 
-20%{
-opacity:.7;
-}
-
-100%{
-transform:translateY(-20vh) translateX(20px);
-opacity:0;
-}
-
-}
-
-/* Sidebar */
-
-/* ===============================
+/* ===================================
    Renaissance Sidebar
-=============================== */
+=================================== */
 
 .sidebar{
-position:fixed;
-left:20px;
-top:50%;
-transform:translateY(-50%);
-width:120px;
-padding:24px 18px;
-background:rgba(15,12,9,.82);
-backdrop-filter:blur(12px);
--webkit-backdrop-filter:blur(12px);
-border:1px solid rgba(201,161,91,.35);
-border-radius:24px;
-box-shadow:0 10px 35px rgba(0,0,0,.45);
-z-index:1000;
+  position:fixed;
+  left:20px;
+  top:50%;
+  transform:translateY(-50%);
+  width:120px;
+  padding:24px 18px;
+  background:rgba(15,12,9,.82);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(201,161,91,.35);
+  border-radius:24px;
+  box-shadow:0 10px 35px rgba(0,0,0,.45);
+  z-index:1000;
 }
 
 .logo{
-font-family:Cinzel,serif;
-font-size:52px;
-color:var(--gold);
-text-align:center;
-margin-bottom:28px;
+  font-family:Cinzel,serif;
+  font-size:52px;
+  color:var(--gold);
+  text-align:center;
+  margin-bottom:28px;
 }
 
 .sidebar nav{
-display:flex;
-flex-direction:column;
-gap:12px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
 .sidebar nav a{
-display:block;
-padding:12px 14px;
-border-radius:12px;
-color:#E9E0D0;
-text-decoration:none;
-font-weight:500;
-transition:.3s;
-}
-
-.sidebar nav a:hover,
-.sidebar nav a.active{
-background:linear-gradient(135deg,#C9A15B,#A67C2D);
-color:#1A1208;
-transform:translateX(4px);
-}
-
-/* Hero */
-
-.hero{
-position:relative;
-min-height:100vh;
-display:flex;
-align-items:center;
-padding:0 8% 0 180px;
-overflow:hidden;
-}
-
-.hero-bg{
-position:absolute;
-inset:0;
-background:url("assets/hero-cathedral.jpeg") center center/cover no-repeat;
-filter:brightness(.45);
-transform:scale(1.08);
-transition:transform .25s ease-out;
-}
-
-.hero::before{
-content:"";
-position:absolute;
-inset:0;
-background:radial-gradient(circle,rgba(255,220,150,.18),transparent 70%);
-filter:blur(35px);
-animation:lightPulse 6s ease-in-out infinite;
-}
-
-@keyframes lightPulse{
-50%{
-opacity:.9;
-}
-}
-
-.hero::after{
-content:"";
-position:absolute;
-right:4%;
-bottom:0;
-width:32%;
-height:90%;
-background:url("assets/marble-statue.jpeg") bottom center/contain no-repeat;
-filter:drop-shadow(0 0 40px rgba(201,161,91,.45));
-transform:translate(var(--mx,0),var(--my,0));
-transition:transform .18s ease-out;
-animation:statueFloat 7s ease-in-out infinite;
-z-index:2;
-}
-@keyframes statueFloat{
-
-0%,100%{
-transform:translate(var(--mx,0),var(--my,0));
-}
-
-50%{
-transform:translate(var(--mx,0),calc(var(--my,0) - 10px));
-}
-
-}
-.hero-content{
-position:relative;
-z-index:3;
-max-width:650px;
-}
-
-.hero-title{
-font-family:Cinzel,serif;
-font-size:88px;
-line-height:.9;
-font-weight:700;
-background:linear-gradient(
-120deg,
-#fff6d7 0%,
-#d4a24a 35%,
-#fff8dc 50%,
-#d4a24a 70%,
-#fff6d7 100%);
-background-size:250% auto;
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:goldShine 6s linear infinite;
-}
-.hero-title span{
-display:block;
-}
-
-@keyframes goldShine{
-
-0%{
-background-position:-200% center;
-}
-
-100%{
-background-position:200% center;
-}
-
-}
-.hero-title span{
-display:block;
-color:var(--gold);
-}
-
-.hero-subtitle{
-margin-top:20px;
-font-family:"Libre Baskerville",serif;
-font-style:italic;
-color:#D7C19D;
-}
-
-.hero-description{
-margin-top:24px;
-line-height:1.8;
-color:#E8E0D0;
-}
-
-.gold-btn{
-display:inline-block;
-margin-top:35px;
-padding:15px 28px;
-border:1px solid var(--gold);
-color:var(--gold);
-text-decoration:none;
-transition:.35s;
-}
-
-.gold-btn:hover{
-background:var(--gold);
-color:#1C1309;
-}
-
-/* Sections */
-
-.parchment{
-background:var(--parchment);
-color:#2C2114;
-padding:100px 8% 100px 180px;
-}
-
-.section-title{
-margin-bottom:45px;
-}
-
-.section-title p{
-letter-spacing:3px;
-color:#A37A36;
-}
-
-.section-title h2{
-font-family:Cinzel,serif;
-font-size:42px;
-}
-
-/* Cards */
-
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:35px;
-}
-
-.card{
-position:relative;
-background:#F7F1E5;
-padding:18px;
-border:6px solid #A97A2B;
-outline:2px solid #D9B66A;
-box-shadow:0 15px 35px rgba(0,0,0,.25);
-transition:.45s;
-overflow:hidden;
-transform-style:preserve-3d;
-}
-
-.card:hover{
-transform:perspective(900px) rotateX(5deg) rotateY(5deg) translateY(-12px);
-}
-
-.card::before{
-content:"";
-position:absolute;
-top:-40%;
-left:-25%;
-width:150%;
-height:80%;
-background:linear-gradient(120deg,transparent,rgba(255,230,170,.25),transparent);
-transform:rotate(-12deg);
-transition:.7s;
-}
-
-.card:hover::before{
-transform:translateX(120%) rotate(-12deg);
-}
-
-.card img,
-.card video{
-width:100%;
-display:block;
-border:4px solid #4A3820;
-}
-
-.card h3{
-margin-top:18px;
-font-family:Cinzel,serif;
-}
-
-.card p{
-margin-top:10px;
-line-height:1.7;
-}
-
-/* About */
-
-.about-content{
-max-width:720px;
-line-height:1.9;
-}
-
-.skills{
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-margin-top:28px;
-}
-
-.skills span{
-padding:10px 18px;
-border:1px solid var(--gold);
-border-radius:40px;
-}
-
-.contact-links{
-display:flex;
-gap:18px;
-margin-top:35px;
-flex-wrap:wrap;
-}
-
-.contact-links a{
-padding:14px 24px;
-border:1px solid var(--gold);
-text-decoration:none;
-color:var(--gold);
-transition:.3s;
-}
-
-.contact-links a:hover{
-background:var(--gold);
-color:#1C1309;
-}
-
-/* Fade In */
-
-.card,
-.section-title{
-opacity:0;
-transform:translateY(30px);
-}
-
-.card.show,
-.section-title.show{
-opacity:1;
-transform:translateY(0);
-transition:.7s;
-}
-
-/* Mobile */
-
-@media(max-width:900px){
-
-.sidebar{
-left:12px;
-top:50%;
-transform:translateY(-50%);
-width:90px;
-padding:18px 12px;
-border-radius:18px;
-}
-
-.logo{
-font-size:36px;
-margin-bottom:18px;
-}
-
-.sidebar nav a{
-padding:10px 8px;
-font-size:15px;
-text-align:center;
-}
-
-.hero{
-padding:120px 8%;
-}
-
-.hero-title{
-font-size:52px;
-}
-
-.hero::after{
-display:none;
-}
-
-/* Prevent content from hiding behind sidebar */
-
-.parchment{
-padding:80px 25px 80px 120px;
-}
-
-.about-content{
-max-width:100%;
-}
-
-.skills{
-justify-content:flex-start;
-}
-
-.contact-links{
-flex-direction:column;
-}
-
-.contact-links a{
-text-align:center;
-}
-
-}
+  display:block;
+  padding:12px;
+  border-radius:12px;
+  color:var(--text);
+  text-decoration:none;
+  text-align:center;
+  transition:.
