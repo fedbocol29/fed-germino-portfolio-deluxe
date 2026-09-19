@@ -1,131 +1,96 @@
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
-const glow=document.querySelector(".cursor-glow");
+  // ===============================
+  // Mouse Gold Glow
+  // ===============================
 
-if(glow){
+  const glow = document.querySelector(".cursor-glow");
 
-document.addEventListener("mousemove",e=>{
+  if (glow) {
+    document.addEventListener("mousemove", (e) => {
+      glow.style.left = e.clientX + "px";
+      glow.style.top = e.clientY + "px";
+    });
+  }
 
-glow.style.left=e.clientX+"px";
-glow.style.top=e.clientY+"px";
+  // ===============================
+  // Floating Dust Particles
+  // ===============================
 
-});
+  const particles = document.querySelector(".particles");
 
-}
+  if (particles && particles.children.length === 0) {
 
-const particles=document.querySelector(".particles");
+    for (let i = 0; i < 70; i++) {
 
-if(particles){
+      const p = document.createElement("span");
 
-for(let i=0;i<70;i++){
+      p.className = "particle";
 
-const p=document.createElement("span");
+      if (i % 3 === 0) {
+        p.classList.add("large");
+      }
 
-p.className="particle";
+      p.style.left = Math.random() * 100 + "%";
+      p.style.animationDelay = Math.random() * 15 + "s";
+      p.style.animationDuration = (12 + Math.random() * 12) + "s";
 
-if(i%3===0)p.classList.add("large");
+      particles.appendChild(p);
+    }
+  }
 
-p.style.left=Math.random()*100+"%";
+  // ===============================
+  // Hero Parallax + Statue Movement
+  // ===============================
 
-p.style.animationDelay=Math.random()*15+"s";
+  const hero = document.querySelector(".hero");
+  const heroBg = document.querySelector(".hero-bg");
 
-p.style.animationDuration=(12+Math.random()*12)+"s";
+  if (hero) {
 
-particles.appendChild(p);
+    document.addEventListener("mousemove", (e) => {
 
-}
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 8;
 
-}
+      hero.style.setProperty("--mx", `${x}px`);
+      hero.style.setProperty("--my", `${y}px`);
 
-const heroBg=document.querySelector(".hero-bg");
+      if (heroBg) {
+        heroBg.style.transform =
+          `translate(${x / 5}px, ${y / 5}px) scale(1.08)`;
+      }
 
-if(heroBg){
+    });
 
-window.addEventListener("scroll",()=>{
+    window.addEventListener("scroll", () => {
 
-heroBg.style.transform=
-`translateY(${window.scrollY*.12}px) scale(1.06)`;
+      if (!heroBg) return;
 
-});
+      const offset = window.scrollY * 0.12;
 
-}
+      heroBg.style.transform =
+        `translateY(${offset}px) scale(1.08)`;
 
-// ===============================
-// Cinematic Hero Movement
-// ===============================
+    });
 
-const hero=document.querySelector(".hero");
-const heroBg=document.querySelector(".hero-bg");
+  }
 
-if(hero){
+  // ===============================
+  // Auto Play Videos
+  // ===============================
 
-document.addEventListener("mousemove",e=>{
+  const videoObserver = new IntersectionObserver((entries) => {
 
-const x=(e.clientX/window.innerWidth-.5)*10;
-const y=(e.clientY/window.innerHeight-.5)*8;
+    entries.forEach((entry) => {
 
-hero.style.setProperty("--mx",`${x}px`);
-hero.style.setProperty("--my",`${y}px`);
+      const video = entry.target;
 
-if(heroBg){
+      if (entry.isIntersecting) {
 
-heroBg.style.transform=
-`translate(${x/5}px,${y/5}px) scale(1.08)`;
+        video.play().catch(() => {});
 
-}
+      } else {
 
-});
-
-}
-
-/* Auto Play Videos */
-
-const videoObserver=new IntersectionObserver(entries=>{
-
-entries.forEach(entry=>{
-
-const video=entry.target.querySelector("video");
-
-if(!video)return;
-
-if(entry.isIntersecting){
-
-video.play().catch(()=>{});
-
-}else{
-
-video.pause();
-video.currentTime=0;
-
-}
-
-});
-
-},{threshold:.45});
-
-document.querySelectorAll(".card").forEach(card=>{
-
-videoObserver.observe(card);
-
-});
-
-/* Fade In */
-
-const observer=new IntersectionObserver(entries=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-entry.target.classList.add("show");
-
-}
-
-});
-
-},{threshold:.15});
-
-document.querySelectorAll(".card,.section-title")
-.forEach(el=>observer.observe(el));
-
-});
+        video.pause();
+        video
